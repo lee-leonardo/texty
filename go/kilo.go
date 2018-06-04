@@ -7,16 +7,14 @@ import (
 )
 
 const (
-	ESC   = 0
-	ENTER = 0
-	Q     = 0
+	ESC   = 27
+	ENTER = 10
+	Q     = 113
 )
 
 func main() {
-	var sig int
+	var sig int = 0
 	reader := bufio.NewReader(os.Stdin)
-
-	fmt.Printf("Hello, World!")
 
 	for sig == 0 {
 		rune, _, err := reader.ReadRune()
@@ -35,6 +33,6 @@ func main() {
 			continue
 		}
 
-		fmt.Printf("%d %c", rune, rune)
+		fmt.Printf("%d %c\n", rune, rune)
 	}
 }
