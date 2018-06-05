@@ -1,8 +1,7 @@
 package main
 
-/*
-Constants for the CLI are pulled primarily from this source. https://godoc.org/github.com/cznic/ccir/libc/unistd
-*/
+// #include <unistd.h>
+import "C"
 
 import (
 	"fmt"
@@ -11,6 +10,9 @@ import (
 	"github.com/pkg/term/termios"
 )
 
+/*
+Constants for the CLI are pulled primarily from this source. https://godoc.org/github.com/cznic/ccir/libc/unistd
+*/
 const (
 	stdInFileNo = 0 //STDIN_FILENO
 )
