@@ -13,18 +13,37 @@ import (
 /*
 Constants for the CLI are pulled primarily from this source. https://godoc.org/github.com/cznic/ccir/libc/unistd
 */
+
 const (
-	stdInFileNo = 0 //STDIN_FILENO
+	stdIn uintptr = 0
 )
 
 var (
 	term = syscall.Termios{}
 )
 
-func setDefaultAttributes() {
-	err := termios.Tcgetattr(stdInFileNo, &term)
+func getAttributes() error {
+	err := termios.Tcgetattr(stdIn, &term)
 
 	if err != nil {
 		fmt.Println(err)
+		return err
+	}
+}
+
+func setDefaultAttributes() error {
+	err := getAttributes()
+
+	if err != nil {
+		return err
+	}
+
+	// syscall.ECHO
+
+	err = termios.Tcsetattr(stdIn, syscall.TCSAFLUSH, &term)
+
+	if err != nil {
+		fmt.Println(err)
+		return err
 	}
 }
